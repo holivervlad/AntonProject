@@ -32,5 +32,9 @@ public class ContactPage {
     @FindBy(xpath = "//button[@name = 'inlineEditButton']")
     private WebElement inlineEditButton;
 
+    @FindBy(xpath = "")
+    private WebElement deleteThisFindBy;
+
+
 
 }
