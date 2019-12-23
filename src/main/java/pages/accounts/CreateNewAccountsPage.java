@@ -57,18 +57,18 @@ public class CreateNewAccountsPage extends BasePage {
 
     public AccountsPage createNewAccount(String accountName, double slaSerialNumber) {
         waitUntilLoading(accountNameField);
-
+        accountNameField.click();
         accountNameField.sendKeys(accountName);
-
         waitUntilLoading(activeDropDown);
         activeDropDown.click();
         waitUntilLoading(chooseActiveinActiveDropDown);
         waitUntilLoading(chooseActiveinActiveDropDown);
         chooseActiveinActiveDropDown.click();
-        Actions actions = new Actions(driver);
-        actions.moveToElement(slaDropDown);
-        actions.perform();
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", slaDropDown);
+        scrollToDownOfThePage(slaDropDown, slaDropDown);
+//        Actions actions = new Actions(driver);
+//        actions.moveToElement(slaDropDown);
+//        actions.perform();
+//        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", slaDropDown);
         waitUntilLoading(slaDropDown);
         slaDropDown.click();
         waitUntilLoading(valueInTheSlaDropDown);

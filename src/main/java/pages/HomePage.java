@@ -14,10 +14,10 @@ public class HomePage extends BasePage {
     private WebElement accountsTab;
 
     public AccountsPage openAccountsPage() {
-        waitUntilLoading(tabDropDown);
-        tabDropDown.click();
-        waitUntilLoading(accountsTab);
-        accountsTab.click();
+//        waitUntilLoading(tabDropDown);
+//        tabDropDown.click();
+//        waitUntilLoading(accountsTab);
+//        accountsTab.click();
         return new AccountsPage();
     }
 

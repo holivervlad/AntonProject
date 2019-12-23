@@ -4,12 +4,17 @@ import base.BaseTest;
 import base.Tools;
 import data.UserData;
 import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 import pages.accounts.AccountsPage;
 import pages.accounts.CreateNewAccountsPage;
 import pages.HomePage;
 import pages.LogInPage;
 import sun.jvm.hotspot.tools.Tool;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 public class CreateNewAccount extends BaseTest {
     public LogInPage logInPage;
@@ -30,8 +35,12 @@ public class CreateNewAccount extends BaseTest {
                 .createNewAccount(accountName, Tools.getFakeSlaSerialNumber());
         Assert.assertTrue(accountsPage.isAccountCreated(accountName),
                 String.format("Account with name'%s' should be created.", accountName));
-
     }
-}
+    @AfterMethod
+    public void closeSubTab() {
+
+        }
+    }
+
 
 
