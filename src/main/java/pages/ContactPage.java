@@ -9,16 +9,16 @@ public class ContactPage {
     private WebElement newButton;
 
     @FindBy(xpath = "//div[text() = 'Import']")
-    private WebElement ImpotnButton;
+    private WebElement importButton;
 
     @FindBy(xpath = "//div[text() = 'Send List Email']")
     private WebElement sendListEmailButton;
 
     @FindBy(xpath = "//lightning-input[@class='slds-form-element']")
-    private WebElement localSerach;
+    private WebElement localSearch;
 
     @FindBy(xpath = "//div[@class = 'triggerLinkTextAndIconWrapper slds-p-right--x-large']//a")
-    private WebElement listViewButton;
+    private WebElement listViewButton; //// for this use contains,
 
     @FindBy(xpath = "//button[@title='List View Controls']")
     private WebElement listViewControlsButton;
@@ -31,10 +31,4 @@ public class ContactPage {
 
     @FindBy(xpath = "//button[@name = 'inlineEditButton']")
     private WebElement inlineEditButton;
-
-    @FindBy(xpath = "")
-    private WebElement deleteThisFindBy;
-
-
-
 }

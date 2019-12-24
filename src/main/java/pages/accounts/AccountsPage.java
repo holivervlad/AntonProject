@@ -16,20 +16,20 @@ public class AccountsPage extends BasePage {
     @FindBy(xpath = "//div[@title = 'New']")
     private WebElement newAccountButton;
 
-    @FindBy(xpath = "//div//a/div[@title = 'Import']")
+    @FindBy(xpath = "//div//a/div[@title = 'Import']")   // try use less tags
     private WebElement importButton;
 
     @FindBy(xpath = "//h1[@class = 'slds-truncate slds-page-header__title slds-text-color--default']")
     private WebElement listViewDropDown;
 
     @FindBy(xpath = "//ul[@id='virtualAutocompleteListbox_e4947a128442e']/li[2]")
-    private WebElement allAccountsListView;
+    private WebElement allAccountsListView;  // rework this locator
 
     @FindBy (xpath = "//input[@id = 'input-101']")
-    private WebElement localSearch;
+    private WebElement localSearch;  // rework this locator
 
     @FindBy(xpath = "//span[@title = 'atest']")
-    private WebElement testAccount;
+    private WebElement testAccount;  // rework this locator
 
     @FindBy(xpath = "//div[@title = 'Edit']")
     private WebElement editButton;
