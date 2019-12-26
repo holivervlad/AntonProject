@@ -19,9 +19,6 @@ public class AccountsPage extends BasePage {
     @FindBy(xpath = "//div[@title = 'Import']")
     private WebElement importButton;
 
-    @FindBy(xpath = "//a[@role = 'button'][@title = 'Select List View']")
-    private WebElement listViewDropDown;
-
     @FindBy(xpath = "//li//span[text() = 'All Accounts']")
     private WebElement allAccountsListView;
 
@@ -34,16 +31,12 @@ public class AccountsPage extends BasePage {
     @FindBy(xpath = "//div[@title = 'Edit']")
     private WebElement editButton;
 
-    @FindBy(xpath = "//tbody//tr//th")
-    private List<WebElement> accountNames;
-
-    @FindBy(xpath = "//button[@title = 'Show Navigation Menu']")
-    private WebElement tabDropDown;
-
     @FindBy(xpath = "//a[@title = 'Accounts']/span[2]")
     private WebElement accountsTab;
 
-CreateNewAccountsPage createNewAccountsPage;
+    CreateNewAccountsPage createNewAccountsPage;
+    BasePage basePage;
+
 
     public CreateNewAccountsPage clickOnNewAccountButton () {
         waitUntilLoading(newAccountButton);

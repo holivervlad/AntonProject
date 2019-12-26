@@ -1,9 +1,14 @@
 package pages;
 
+import base.BasePage;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class ContactPage {
+import java.util.Arrays;
+import java.util.List;
+
+public class ContactPage extends BasePage {
+    BasePage basePage;
 
     @FindBy(xpath = "//div[text() = 'New']")
     private WebElement newButton;
@@ -31,4 +36,27 @@ public class ContactPage {
 
     @FindBy(xpath = "//button[@name = 'inlineEditButton']")
     private WebElement inlineEditButton;
+
+    @FindBy(xpath = "//a[@title = 'Contacts']/span[2]")
+    private WebElement contactsTab;
+
+    @FindBy(xpath = "//li//span[text() = 'All Contacts']")
+    private WebElement allContactsListView;
+
+    public ContactPage openAllContactsListView() {
+        waitUntilLoading(listViewDropDown);
+        listViewDropDown.click();
+        waitUntilLoading(allContactsListView);
+        allContactsListView.click();
+        return new ContactPage();
+    }
+
+    public boolean isSpecialContactsDisplay(String nameOfContact) {
+        waitUntilLoading(allContactsListView);
+        return
+        allElementsOfCurrentListView.stream()
+                .anyMatch(x -> nameOfContact.equals(x.getText()));
+                 }
 }
+
+
