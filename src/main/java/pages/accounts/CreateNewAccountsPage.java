@@ -59,13 +59,8 @@ public class CreateNewAccountsPage extends BasePage {
 //        actions.moveToElement(slaDropDown);
 //        actions.perform();
 //        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", slaDropDown);
-        waitUntilLoading(slaDropDown);
-        slaDropDown.click();
-        waitUntilLoading(valueInTheSlaDropDown);
-        valueInTheSlaDropDown.click();
-        slaExpirationDateDropDownCalendar.click();
-        waitUntilLoading(todayDateInSlaExpirationDateDropDownCalendar);
-        todayDateInSlaExpirationDateDropDownCalendar.click();
+        fillSlaDropDown();
+        fillSlaExpirationDateDropDownCalendar();
         waitUntilLoading(slaSerialNumberField);
         slaSerialNumberField.sendKeys(String.valueOf(slaSerialNumber));
 
@@ -73,6 +68,22 @@ public class CreateNewAccountsPage extends BasePage {
         saveButton.click();
         return new AccountsPage();
     }
+
+    public CreateNewAccountsPage fillSlaDropDown() {
+        waitUntilLoading(slaDropDown);
+        slaDropDown.click();
+        waitUntilLoading(valueInTheSlaDropDown);
+        valueInTheSlaDropDown.click();
+        return new CreateNewAccountsPage();
+    }
+
+    public CreateNewAccountsPage fillSlaExpirationDateDropDownCalendar() {
+        slaExpirationDateDropDownCalendar.click();
+        waitUntilLoading(todayDateInSlaExpirationDateDropDownCalendar);
+        todayDateInSlaExpirationDateDropDownCalendar.click();
+        return new CreateNewAccountsPage();
+    }
+
 
 
 }

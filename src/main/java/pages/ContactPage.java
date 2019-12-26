@@ -43,6 +43,12 @@ public class ContactPage extends BasePage {
     @FindBy(xpath = "//li//span[text() = 'All Contacts']")
     private WebElement allContactsListView;
 
+    public ContactPage openContactListViewFromContact() {
+        tabDropDown.click();
+        contactsTab.click();
+        return new ContactPage();
+    }
+
     public ContactPage openAllContactsListView() {
         waitUntilLoading(listViewDropDown);
         listViewDropDown.click();
@@ -53,10 +59,13 @@ public class ContactPage extends BasePage {
 
     public boolean isSpecialContactsDisplay(String nameOfContact) {
         waitUntilLoading(allContactsListView);
-        return
         allElementsOfCurrentListView.stream()
-                .anyMatch(x -> nameOfContact.equals(x.getText()));
-                 }
+                .coll
+        return 3;
+//        allElementsOfCurrentListView.stream()
+//                .coll
+//                .anyMatch(x -> nameOfContact.equals(x.getText()));
+//                 }
 }
 
 
