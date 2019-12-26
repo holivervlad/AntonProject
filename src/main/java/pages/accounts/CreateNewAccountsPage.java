@@ -1,18 +1,8 @@
 package pages.accounts;
 
 import base.BasePage;
-import configurationManager.BaseConfiguration;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
-import org.testng.Assert;
-import pages.accounts.AccountsPage;
-
-import javax.swing.*;
-import java.util.NoSuchElementException;
 
 public class CreateNewAccountsPage extends BasePage {
 
@@ -26,13 +16,13 @@ public class CreateNewAccountsPage extends BasePage {
     private WebElement activeDropDown;
 
     @FindBy(xpath = "//div[@class = 'select-options']//a[text() = 'Yes']")
-    private WebElement chooseActiveinActiveDropDown;
+    private WebElement chooseActiveInActiveDropDown;
 
     @FindBy(xpath = "//span[text() = 'SLA Expiration Date']/../..//input")
     private WebElement slaExpirationDateDropDownCalendar;
 
     @FindBy(xpath = "//td[@class='slds-is-today slds-is-selected uiDayInMonthCell']/span")
-    private WebElement todaysDateInSlaExpirationDateDropDownCalendar;
+    private WebElement todayDateInSlaExpirationDateDropDownCalendar;
 
     @FindBy(xpath = "//span[text() = 'SLA']/../..//div[@class = 'uiMenu']")
     private WebElement slaDropDown;
@@ -61,9 +51,9 @@ public class CreateNewAccountsPage extends BasePage {
         accountNameField.sendKeys(accountName);
         waitUntilLoading(activeDropDown);
         activeDropDown.click();
-        waitUntilLoading(chooseActiveinActiveDropDown);
-        waitUntilLoading(chooseActiveinActiveDropDown);
-        chooseActiveinActiveDropDown.click();
+        waitUntilLoading(chooseActiveInActiveDropDown);
+        waitUntilLoading(chooseActiveInActiveDropDown);
+        chooseActiveInActiveDropDown.click();
         scrollToDownOfThePage(slaDropDown, slaDropDown);
 //        Actions actions = new Actions(driver);
 //        actions.moveToElement(slaDropDown);
@@ -74,8 +64,8 @@ public class CreateNewAccountsPage extends BasePage {
         waitUntilLoading(valueInTheSlaDropDown);
         valueInTheSlaDropDown.click();
         slaExpirationDateDropDownCalendar.click();
-        waitUntilLoading(todaysDateInSlaExpirationDateDropDownCalendar);
-        todaysDateInSlaExpirationDateDropDownCalendar.click();
+        waitUntilLoading(todayDateInSlaExpirationDateDropDownCalendar);
+        todayDateInSlaExpirationDateDropDownCalendar.click();
         waitUntilLoading(slaSerialNumberField);
         slaSerialNumberField.sendKeys(String.valueOf(slaSerialNumber));
 

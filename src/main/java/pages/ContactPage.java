@@ -14,11 +14,11 @@ public class ContactPage {
     @FindBy(xpath = "//div[text() = 'Send List Email']")
     private WebElement sendListEmailButton;
 
-    @FindBy(xpath = "//lightning-input[@class='slds-form-element']")
+    @FindBy(xpath = "//input[@name = 'Contact-search-input']")
     private WebElement localSearch;
 
-    @FindBy(xpath = "//div[@class = 'triggerLinkTextAndIconWrapper slds-p-right--x-large']//a")
-    private WebElement listViewButton; //// for this use contains,
+    @FindBy(xpath = "//button[@title = 'Show Navigation Menu']")
+    private WebElement listViewButton;
 
     @FindBy(xpath = "//button[@title='List View Controls']")
     private WebElement listViewControlsButton;
