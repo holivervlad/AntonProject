@@ -1,11 +1,15 @@
 package pages;
 
 import base.BasePage;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.testng.annotations.Test;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class ContactPage extends BasePage {
     BasePage basePage;
@@ -44,7 +48,9 @@ public class ContactPage extends BasePage {
     private WebElement allContactsListView;
 
     public ContactPage openContactListViewFromContact() {
+        waitUntilLoading(tabDropDown);
         tabDropDown.click();
+        waitUntilLoading(contactsTab);
         contactsTab.click();
         return new ContactPage();
     }
@@ -54,18 +60,38 @@ public class ContactPage extends BasePage {
         listViewDropDown.click();
         waitUntilLoading(allContactsListView);
         allContactsListView.click();
+        waitUntilLoading(listViewDropDown);
+        listViewDropDown.click();
+        waitUntilLoading(allContactsListView);
+        allContactsListView.click();
         return new ContactPage();
     }
 
-    public boolean isSpecialContactsDisplay(String nameOfContact) {
+    public void isSpecialContactsDisplay(String nameOfContact) {
         waitUntilLoading(allContactsListView);
-        allElementsOfCurrentListView.stream()
-                .coll
-        return 3;
+        List<WebElement> linkElements = driver.findElements(By.xpath("//tbody//tr//th"));
+        linkElements.stream()
+                .filter(s -> s.equals(nameOfContact))
+                .collect(Collectors.toList())
+                .forEach(System.out::print);
+
+//        Stream<WebElement> stream = allElementsOfCurrentListView.stream();
+//        stream.filter(s -> s.equals(nameOfContact))
+//                .forEach(System.out::print);
+    }
+
+
+//       //List<WebElement> list = Arrays.stream(allElementsOfCurrentListView)
+//                .filter(s -> s.contains(nameOfContact))
+//                .collect(Collectors.toList());
+
 //        allElementsOfCurrentListView.stream()
-//                .coll
-//                .anyMatch(x -> nameOfContact.equals(x.getText()));
-//                 }
+//                .filter(s -> s.)
+//        return ;
+
+
+
 }
+
 
 
