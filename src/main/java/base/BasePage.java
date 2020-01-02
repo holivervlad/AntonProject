@@ -45,5 +45,7 @@ public class BasePage extends Base{
         actions.moveToElement(elementFirst);
         actions.perform();
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", elementSecond);
+        //
+        //
     }
 }
