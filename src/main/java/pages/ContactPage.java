@@ -75,12 +75,13 @@ public class ContactPage extends BasePage {
                 .filter(s -> s.equals(nameOfContact))
                 .collect(Collectors.toList());
         for (int iCounter = 0; iCounter <allElementsOfCurrentListView.size(); iCounter++) {
-            if (sobjectList.get(iCounter).equals("")
-                    || sobjectList.get(iCounter).equals("")
-                    || sobjectList.get(iCounter).equals("")
-                    || sobjectList.get(iCounter).equals("")
-                    || sobjectList.get(iCounter).equals("")
-                    || sobjectList.get(iCounter).equals(""))
+            if (sobjectList.get(iCounter).equals("test Contact 1 test")
+                    || sobjectList.get(iCounter).equals("Test Contact 2 test")
+                    || sobjectList.get(iCounter).equals("Mr. test FirstContact")
+                    || sobjectList.get(iCounter).equals("test FourthContact")
+                    || sobjectList.get(iCounter).equals("test LastContact")
+                    || sobjectList.get(iCounter).equals("Ms. test SecondContact")
+                    || sobjectList.get(iCounter).equals("test ThirdContact"))
                 return true;
         }
         return false;
