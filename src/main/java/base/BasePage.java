@@ -6,6 +6,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -28,11 +29,16 @@ public class BasePage extends Base{
     public void waitUntilLoading(WebElement element) {
         WebDriverWait wait = new WebDriverWait(driver, 10000);
         wait.until(ExpectedConditions.visibilityOf(element));
-        wait.ignoring(StaleElementReferenceException.class);
+        WebDriverWait wait4 = new WebDriverWait(driver, 10000);
+        wait4.ignoring(StaleElementReferenceException.class);
 
         Wait<WebDriver> wait2 = new WebDriverWait(driver, 20, 5000);
-        driver.manage().timeouts().setScriptTimeout(40, TimeUnit.SECONDS);
-        driver.manage().timeouts().pageLoadTimeout(60, TimeUnit.SECONDS);
+        wait2.until(ExpectedConditions.visibilityOf(element));
+
+        driver.manage().timeouts().setScriptTimeout(4000, TimeUnit.SECONDS);
+        driver.manage().timeouts().pageLoadTimeout(6000, TimeUnit.SECONDS);
+       Wait<WebDriver> wait3 = new FluentWait<WebDriver>(driver).withMessage("Element was not found").withTimeout(10000, TimeUnit.SECONDS).pollingEvery(10000, TimeUnit.SECONDS);
+        wait3.until(ExpectedConditions.visibilityOf(element));
 
     }
 
@@ -45,5 +51,7 @@ public class BasePage extends Base{
         actions.moveToElement(elementFirst);
         actions.perform();
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", elementSecond);
+        //
+        //
     }
 }

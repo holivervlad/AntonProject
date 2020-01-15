@@ -13,6 +13,7 @@ import java.util.stream.Stream;
 
 public class ContactPage extends BasePage {
     BasePage basePage;
+    public static List<WebElement> sobjectList;
 
     @FindBy(xpath = "//div[text() = 'New']")
     private WebElement newButton;
@@ -67,13 +68,33 @@ public class ContactPage extends BasePage {
         return new ContactPage();
     }
 
-    public void isSpecialContactsDisplay(String nameOfContact) {
+    public boolean isSpecialContactsDisplay(String nameOfContact) {
         waitUntilLoading(allContactsListView);
-        List<WebElement> linkElements = driver.findElements(By.xpath("//tbody//tr//th"));
-        linkElements.stream()
+
+        sobjectList = allElementsOfCurrentListView.stream()
                 .filter(s -> s.equals(nameOfContact))
-                .collect(Collectors.toList())
-                .forEach(System.out::print);
+                .collect(Collectors.toList());
+        for (int iCounter = 0; iCounter <allElementsOfCurrentListView.size(); iCounter++) {
+            if (sobjectList.get(iCounter).equals("test Contact 1 test")
+                    || sobjectList.get(iCounter).equals("Test Contact 2 test")
+                    || sobjectList.get(iCounter).equals("Mr. test FirstContact")
+                    || sobjectList.get(iCounter).equals("test FourthContact")
+                    || sobjectList.get(iCounter).equals("test LastContact")
+                    || sobjectList.get(iCounter).equals("Ms. test SecondContact")
+                    || sobjectList.get(iCounter).equals("test ThirdContact"))
+                return true;
+        }
+        return false;
+
+
+
+//        List<WebElement> linkElements = driver.findElements(By.xpath("//tbody//tr//th"));
+//        linkElements.stream()
+//                .filter(s -> s.equals(nameOfContact))
+//                .collect(Collectors.toList())
+//                .forEach(System.out::print);
+
+
 
 //        Stream<WebElement> stream = allElementsOfCurrentListView.stream();
 //        stream.filter(s -> s.equals(nameOfContact))
