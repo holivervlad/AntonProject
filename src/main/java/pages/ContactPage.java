@@ -1,15 +1,11 @@
 package pages;
 
 import base.BasePage;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.testng.annotations.Test;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class ContactPage extends BasePage {
     BasePage basePage;
@@ -42,34 +38,35 @@ public class ContactPage extends BasePage {
     @FindBy(xpath = "//button[@name = 'inlineEditButton']")
     private WebElement inlineEditButton;
 
-    @FindBy(xpath = "//a[@title = 'Contacts']/span[2]")
+//    @FindBy(xpath = "//a[@title = 'Contacts']/span[2]")
+    @FindBy(xpath = "//li//a[@title = 'Contacts']")
     private WebElement contactsTab;
 
     @FindBy(xpath = "//li//span[text() = 'All Contacts']")
     private WebElement allContactsListView;
 
     public ContactPage openContactListViewFromContact() {
-        waitUntilLoading(tabDropDown);
+        waitUntilElementIsShown(tabDropDown);
         tabDropDown.click();
-        waitUntilLoading(contactsTab);
+        waitUntilElementIsShown(contactsTab);
         contactsTab.click();
-        return new ContactPage();
+        return this;
     }
 
     public ContactPage openAllContactsListView() {
-        waitUntilLoading(listViewDropDown);
+        waitUntilElementIsShown(listViewDropDown);
         listViewDropDown.click();
-        waitUntilLoading(allContactsListView);
+        waitUntilElementIsShown(allContactsListView);
         allContactsListView.click();
-        waitUntilLoading(listViewDropDown);
+        waitUntilElementIsShown(listViewDropDown);
         listViewDropDown.click();
-        waitUntilLoading(allContactsListView);
+        waitUntilElementIsShown(allContactsListView);
         allContactsListView.click();
-        return new ContactPage();
+        return this;
     }
 
     public boolean isSpecialContactsDisplay(String nameOfContact) {
-        waitUntilLoading(allContactsListView);
+        waitUntilElementIsShown(allContactsListView);
 
         sobjectList = allElementsOfCurrentListView.stream()
                 .filter(s -> s.equals(nameOfContact))

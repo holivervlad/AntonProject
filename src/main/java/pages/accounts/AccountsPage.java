@@ -8,7 +8,6 @@ import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.Set;
 
 
 public class AccountsPage extends BasePage {
@@ -39,7 +38,7 @@ public class AccountsPage extends BasePage {
 
 
     public CreateNewAccountsPage clickOnNewAccountButton () {
-        waitUntilLoading(newAccountButton);
+        waitUntilElementIsShown(newAccountButton);
         newAccountButton.click();
         return new CreateNewAccountsPage();
     }
@@ -50,7 +49,7 @@ public class AccountsPage extends BasePage {
     }
 
     public EditAccountPage OpenEditAccountPage() {
-        waitUntilLoading(editButton);
+        waitUntilElementIsShown(editButton);
         editButton.click();
         return new EditAccountPage();
     }
@@ -74,9 +73,9 @@ public class AccountsPage extends BasePage {
     }
 
     public AccountsPage returnToAccountsPage() {
-        waitUntilLoading(tabDropDown);
+        waitUntilElementIsShown(tabDropDown);
         tabDropDown.click();
-        waitUntilLoading(accountsTab);
+        waitUntilElementIsShown(accountsTab);
         accountsTab.click();
         return this;
     }

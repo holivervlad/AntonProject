@@ -46,13 +46,13 @@ public class CreateNewAccountsPage extends BasePage {
     private WebElement newAccountPopUp;
 
     public AccountsPage createNewAccount(String accountName, double slaSerialNumber) {
-        waitUntilLoading(accountNameField);
+        waitUntilElementIsShown(accountNameField);
         accountNameField.click();
         accountNameField.sendKeys(accountName);
-        waitUntilLoading(activeDropDown);
+        waitUntilElementIsShown(activeDropDown);
         activeDropDown.click();
-        waitUntilLoading(chooseActiveInActiveDropDown);
-        waitUntilLoading(chooseActiveInActiveDropDown);
+        waitUntilElementIsShown(chooseActiveInActiveDropDown);
+        waitUntilElementIsShown(chooseActiveInActiveDropDown);
         chooseActiveInActiveDropDown.click();
         scrollToDownOfThePage(slaDropDown, slaDropDown);
 //        Actions actions = new Actions(driver);
@@ -61,25 +61,25 @@ public class CreateNewAccountsPage extends BasePage {
 //        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", slaDropDown);
         fillSlaDropDown();
         fillSlaExpirationDateDropDownCalendar();
-        waitUntilLoading(slaSerialNumberField);
+        waitUntilElementIsShown(slaSerialNumberField);
         slaSerialNumberField.sendKeys(String.valueOf(slaSerialNumber));
 
-        waitUntilLoading(saveButton);
+        waitUntilElementIsShown(saveButton);
         saveButton.click();
         return new AccountsPage();
     }
 
     public CreateNewAccountsPage fillSlaDropDown() {
-        waitUntilLoading(slaDropDown);
+        waitUntilElementIsShown(slaDropDown);
         slaDropDown.click();
-        waitUntilLoading(valueInTheSlaDropDown);
+        waitUntilElementIsShown(valueInTheSlaDropDown);
         valueInTheSlaDropDown.click();
         return new CreateNewAccountsPage();
     }
 
     public CreateNewAccountsPage fillSlaExpirationDateDropDownCalendar() {
         slaExpirationDateDropDownCalendar.click();
-        waitUntilLoading(todayDateInSlaExpirationDateDropDownCalendar);
+        waitUntilElementIsShown(todayDateInSlaExpirationDateDropDownCalendar);
         todayDateInSlaExpirationDateDropDownCalendar.click();
         return new CreateNewAccountsPage();
     }

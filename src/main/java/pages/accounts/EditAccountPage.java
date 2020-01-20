@@ -17,10 +17,10 @@ public class EditAccountPage extends BasePage {
     private WebElement saveButton;
 
     public AccountsPage updateAccountName(String newAccountName) {
-        waitUntilLoading(accountNameField);
+        waitUntilElementIsShown(accountNameField);
         accountNameField.clear();
         accountNameField.sendKeys(newAccountName);
-        waitUntilLoading(saveButton);
+        waitUntilElementIsShown(saveButton);
         saveButton.click();
         return new AccountsPage();
     }
@@ -28,7 +28,7 @@ public class EditAccountPage extends BasePage {
     public AccountsPage returnOriginalNameOfAccount(String oldAccountName) {
         accountNameField.clear();
         accountNameField.sendKeys(oldAccountName);
-        waitUntilLoading(saveButton);
+        waitUntilElementIsShown(saveButton);
         saveButton.click();
         return new AccountsPage();
     }

@@ -1,6 +1,7 @@
 package base;
 
 import configurationManager.BaseConfiguration;
+import net.bytebuddy.implementation.bytecode.Addition;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
@@ -26,25 +27,67 @@ public class BasePage extends Base{
     @FindBy(xpath = "//tbody//tr//th")
     public List<WebElement> allElementsOfCurrentListView;
 
-    public void waitUntilLoading(WebElement element) {
-        WebDriverWait wait = new WebDriverWait(driver, 10000);
-        wait.until(ExpectedConditions.visibilityOf(element));
-        WebDriverWait wait4 = new WebDriverWait(driver, 10000);
-        wait4.ignoring(StaleElementReferenceException.class);
+    @FindBy(xpath = "//div[@class='slds-spinner_container slds-grid slds-hide']")
+    public WebElement spinnerIsNotActive;
 
-        Wait<WebDriver> wait2 = new WebDriverWait(driver, 20, 5000);
-        wait2.until(ExpectedConditions.visibilityOf(element));
+    @FindBy(xpath = "//div[@class='slds-spinner_container slds-grid']")
+    public WebElement spinnerIsActive;
 
-        driver.manage().timeouts().setScriptTimeout(4000, TimeUnit.SECONDS);
-        driver.manage().timeouts().pageLoadTimeout(6000, TimeUnit.SECONDS);
-       Wait<WebDriver> wait3 = new FluentWait<WebDriver>(driver).withMessage("Element was not found").withTimeout(10000, TimeUnit.SECONDS).pollingEvery(10000, TimeUnit.SECONDS);
-        wait3.until(ExpectedConditions.visibilityOf(element));
+    public void waitUntilElementIsShown(WebElement element) {
+//        new WebDriverWait(driver, 10)
+//                .ignoring(StaleElementReferenceException.class);
+        if (spinnerIsActive.isEnabled()) {
+            new WebDriverWait(driver, 5);
+            spinnerIsNotActive.isDisplayed();
+            //.until(ExpectedConditions.invisibilityOf(spinnerIsNotActive));
+            new WebDriverWait(driver, 5)
+                    .ignoring(StaleElementReferenceException.class)
+                    .until(ExpectedConditions.visibilityOf(element));
+        } else {
+            spinnerIsNotActive.isEnabled();
+            new WebDriverWait(driver, 5)
+                    .ignoring(StaleElementReferenceException.class)
+                    .until(ExpectedConditions.visibilityOf(element));
+        }
 
+
+        }
+//        else {
+//        spinnerIsActive.isDisplayed();}
+//        new WebDriverWait(driver, 10)
+//                .ignoring(StaleElementReferenceException.class)
+//                .until(ExpectedConditions.visibilityOf(element));
+
+//
+//        wait.until(ExpectedConditions.visibilityOf(element));
+//        wait.ignoring(StaleElementReferenceException.class);
+//        WebDriverWait wait4 = new WebDriverWait(driver, 10000);
+//        wait4.ignoring(StaleElementReferenceException.class);
+//
+//        Wait<WebDriver> wait2 = new WebDriverWait(driver, 20, 5000);
+//        wait2.until(ExpectedConditions.visibilityOf(element));
+//
+//        driver.manage().timeouts().setScriptTimeout(4000, TimeUnit.SECONDS);
+//        driver.manage().timeouts().pageLoadTimeout(6000, TimeUnit.SECONDS);
+//       Wait<WebDriver> wait3 = new FluentWait<WebDriver>(driver).withMessage("Element was not found").withTimeout(10000, TimeUnit.SECONDS).pollingEvery(10000, TimeUnit.SECONDS);
+//        wait3.until(ExpectedConditions.visibilityOf(element));
+
+
+    public void waitUntilPageLoading(){
+        new WebDriverWait(driver, 10)
+                .until(webDriver -> ((JavascriptExecutor) webDriver).executeScript("return document.readyState").equals("complete"));
     }
 
     protected BasePage() {
         PageFactory.initElements(driver, this);
+        waitUntilPageLoading();
+
     }
+
+//    protected BasePage() {
+//        PageFactory.initElements(driver, this);
+//
+//    }
 
     public void scrollToDownOfThePage(WebElement elementFirst, WebElement elementSecond) {
         Actions actions = new Actions(driver);

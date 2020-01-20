@@ -26,10 +26,12 @@ public class HomePage extends BasePage {
     }
 
     public ContactPage openContactListView() {
+        waitUntilElementIsShown(tabDropDown);
         tabDropDown.click();
+        waitUntilPageLoading();
+        waitUntilElementIsShown(contactsTab);
         contactsTab.click();
         return new ContactPage();
     }
 
 }
-
