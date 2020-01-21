@@ -1,6 +1,7 @@
 package pages;
 
 import base.BasePage;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pages.accounts.AccountsPage;
@@ -14,7 +15,7 @@ public class HomePage extends BasePage {
     @FindBy(xpath = "//span[@class='slds-media__body']//span[text() = 'Accounts']")
     private WebElement accountsTab;
 
-    @FindBy(xpath = "//a[@title = 'Contacts']/span[2]")
+    @FindBy(xpath = "//div[@class = 'slds-media slds-listbox__option slds-listbox__option_entity slds-p-around_none']/a[@title = 'Contacts']")
     private WebElement contactsTab;
 
     public AccountsPage openAccountsPage() {
@@ -28,7 +29,6 @@ public class HomePage extends BasePage {
     public ContactPage openContactListView() {
         waitUntilElementIsShown(tabDropDown);
         tabDropDown.click();
-        waitUntilPageLoading();
         waitUntilElementIsShown(contactsTab);
         contactsTab.click();
         return new ContactPage();

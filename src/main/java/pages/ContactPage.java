@@ -46,7 +46,7 @@ public class ContactPage extends BasePage {
     private WebElement allContactsListView;
 
     public ContactPage openContactListViewFromContact() {
-        waitUntilElementIsShown(tabDropDown);
+         waitUntilElementIsShown(tabDropDown);
         tabDropDown.click();
         waitUntilElementIsShown(contactsTab);
         contactsTab.click();

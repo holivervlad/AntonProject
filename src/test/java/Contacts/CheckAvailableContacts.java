@@ -17,7 +17,7 @@ public class CheckAvailableContacts extends BaseTest {
 
 
     @Test
-    public void checkThatListOfContactCreated() {
+    public void checkThatListOfContactCreated()  {
         logInPage = base.openPlayGroundPage();
         homePage = logInPage.logInPlayGround(UserData.SALES_USER_EMAIL, UserData.SALES_USER_PASSWORD);
         homePage.openContactListView()

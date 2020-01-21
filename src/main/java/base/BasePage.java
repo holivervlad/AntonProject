@@ -13,6 +13,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+import java.util.function.Supplier;
 
 public class BasePage extends Base{
     public WebDriver driver = BaseConfiguration.getDriver();
@@ -33,56 +34,70 @@ public class BasePage extends Base{
     @FindBy(xpath = "//div[@class='slds-spinner_container slds-grid']")
     public WebElement spinnerIsActive;
 
-    public void waitUntilElementIsShown(WebElement element) {
-//        new WebDriverWait(driver, 10)
-//                .ignoring(StaleElementReferenceException.class);
-        if (spinnerIsActive.isEnabled()) {
-            new WebDriverWait(driver, 5);
-            spinnerIsNotActive.isDisplayed();
-            //.until(ExpectedConditions.invisibilityOf(spinnerIsNotActive));
-            new WebDriverWait(driver, 5)
-                    .ignoring(StaleElementReferenceException.class)
-                    .until(ExpectedConditions.visibilityOf(element));
-        } else {
-            spinnerIsNotActive.isEnabled();
-            new WebDriverWait(driver, 5)
-                    .ignoring(StaleElementReferenceException.class)
-                    .until(ExpectedConditions.visibilityOf(element));
-        }
-
-
-        }
-//        else {
-//        spinnerIsActive.isDisplayed();}
-//        new WebDriverWait(driver, 10)
-//                .ignoring(StaleElementReferenceException.class)
-//                .until(ExpectedConditions.visibilityOf(element));
-
-//
-//        wait.until(ExpectedConditions.visibilityOf(element));
-//        wait.ignoring(StaleElementReferenceException.class);
-//        WebDriverWait wait4 = new WebDriverWait(driver, 10000);
-//        wait4.ignoring(StaleElementReferenceException.class);
-//
-//        Wait<WebDriver> wait2 = new WebDriverWait(driver, 20, 5000);
-//        wait2.until(ExpectedConditions.visibilityOf(element));
-//
-//        driver.manage().timeouts().setScriptTimeout(4000, TimeUnit.SECONDS);
-//        driver.manage().timeouts().pageLoadTimeout(6000, TimeUnit.SECONDS);
-//       Wait<WebDriver> wait3 = new FluentWait<WebDriver>(driver).withMessage("Element was not found").withTimeout(10000, TimeUnit.SECONDS).pollingEvery(10000, TimeUnit.SECONDS);
-//        wait3.until(ExpectedConditions.visibilityOf(element));
-
-
-    public void waitUntilPageLoading(){
-        new WebDriverWait(driver, 10)
-                .until(webDriver -> ((JavascriptExecutor) webDriver).executeScript("return document.readyState").equals("complete"));
-    }
-
     protected BasePage() {
         PageFactory.initElements(driver, this);
         waitUntilPageLoading();
 
     }
+
+    public void waitUntilSpinnerIsShown() {
+        new WebDriverWait(driver, 5)
+                .ignoring(StaleElementReferenceException.class)
+                .until(ExpectedConditions.visibilityOf(spinnerIsActive));
+    }
+
+    public void waitUntilSpinnerIsDisappeared() {
+        new WebDriverWait(driver, 10)
+                .ignoring(StaleElementReferenceException.class)
+                .until(ExpectedConditions.invisibilityOf(spinnerIsActive));
+    }
+
+    public void waitUntilElementIsShown(WebElement element) {
+        try {
+
+            spinnerIsActive.isDisplayed();
+            waitUntilSpinnerIsDisappeared();
+            new WebDriverWait(driver, 10)
+                    .ignoring(StaleElementReferenceException.class)
+                    .until(ExpectedConditions.visibilityOf(element));
+        } catch (NoSuchElementException e) {
+            new WebDriverWait(driver, 10)
+                    .ignoring(StaleElementReferenceException.class)
+                    .until(ExpectedConditions.visibilityOf(element));
+        }
+    }
+
+    public void waitSpinners() {
+        waitUntilSpinnerIsShown();
+        waitUntilSpinnerIsDisappeared();
+    }
+////////////////////////////////////////////////
+    public void catchSpinner() {
+        try {
+            new WebDriverWait(driver, 10);
+        } catch (NoSuchElementException e) {
+            new WebDriverWait(driver, 10);
+
+        }
+    }
+
+    public void waitElementAfterSpinnerIsDisappeared(WebElement element) {
+        catchSpinner();
+        waitUntilElementIsShown(element);
+
+    }
+
+
+
+
+
+
+    public void waitUntilPageLoading(){
+        new WebDriverWait(driver, 20)
+                .until(webDriver -> ((JavascriptExecutor) webDriver).executeScript("return document.readyState").equals("complete"));
+    }
+
+
 
 //    protected BasePage() {
 //        PageFactory.initElements(driver, this);
